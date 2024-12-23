@@ -24,6 +24,5 @@ class SanitaServiceProvider extends ServiceProvider
             __DIR__.'/Config/sanita-config.php' => config_path('sanita.php'),
         ], 'config');
 
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
     }
 }
