@@ -1,6 +1,6 @@
 <?php
 
-namespace MyVendor\HorizonNotifier\Console;
+namespace Console;
 
 use Illuminate\Console\Command;
 use Laravel\Horizon\Contracts\MasterSupervisorRepository;
