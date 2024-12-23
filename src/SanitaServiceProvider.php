@@ -2,8 +2,8 @@
 
 namespace Sanita;
 
+use Console\CheckHorizonStatusCommand;
 use Illuminate\Support\ServiceProvider;
-use MyVendor\HorizonNotifier\Console\CheckHorizonStatusCommand;
 
 class SanitaServiceProvider extends ServiceProvider
 {
