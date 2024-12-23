@@ -1,0 +1,17 @@
+{
+    "name": "yamil/sanita",
+    "autoload": {
+        "psr-4": {
+            "Yamil\\Sanita\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yamil Martinez",
+            "email": "129751457+Ya1k996@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^11.36"
+    }
+}
