@@ -1,6 +1,6 @@
 <?php
 
-namespace Console;
+namespace Yamil\Sanita\Console;
 
 use Illuminate\Console\Command;
 use Laravel\Horizon\Contracts\MasterSupervisorRepository;

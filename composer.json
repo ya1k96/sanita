@@ -17,7 +17,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Sanita\\SanitaServiceProvider"
+                "Yamil\\Sanita\\SanitaServiceProvider"
             ]
         }
     }
