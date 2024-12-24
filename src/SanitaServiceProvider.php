@@ -2,7 +2,6 @@
 
 namespace Sanita;
 
-use Console\CheckHorizonStatusCommand;
 use Illuminate\Support\ServiceProvider;
 
 class SanitaServiceProvider extends ServiceProvider
@@ -10,7 +9,7 @@ class SanitaServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands([
-            CheckHorizonStatusCommand::class,
+            \Console\CheckHorizonStatusCommand::class,
         ]);
     }
 
