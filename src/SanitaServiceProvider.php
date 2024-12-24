@@ -3,14 +3,13 @@
 namespace Yamil\Sanita;
 
 use Illuminate\Support\ServiceProvider;
-use Sanita\Console\CheckHorizonStatusCommand;
 
 class SanitaServiceProvider extends ServiceProvider
 {
     public function register()
     {
         $this->commands([
-            CheckHorizonStatusCommand::class,
+            Console\CheckHorizonStatusCommand::class,
         ]);
     }
 
