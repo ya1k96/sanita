@@ -16,10 +16,10 @@ class SanitaServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        if (!class_exists(\Laravel\Horizon\Horizon::class)) {
+        /* if (!class_exists(\Laravel\Horizon\Horizon::class)) {
             throw new \RuntimeException('Laravel Horizon is required to use Sanita.');
-        }
-        $configPath = __DIR__ . '/Config/sanita-config.php';
+        } */
+        $configPath = __DIR__ . '/../config/sanita-config.php';
         $this->publishes([$configPath => config_path('sanita.php')], 'config');
     }
 }
