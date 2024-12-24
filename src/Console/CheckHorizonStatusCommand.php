@@ -70,17 +70,17 @@ class CheckHorizonStatusCommand extends Command
         try {
             // Configuración del servidor SMTP usando configuraciones de Laravel
             $mail->isSMTP();
-            $mail->Host       = config('mail.host'); // Obtiene el valor de MAIL_HOST
+            $mail->Host       = config('mail.mailers.smtp.host'); // Accediendo a MAIL_HOST
             $mail->SMTPAuth   = true;
-            $mail->Username   = config('mail.username'); // Obtiene el valor de MAIL_USERNAME
-            $mail->Password   = config('mail.password'); // Obtiene el valor de MAIL_PASSWORD
-            $mail->SMTPSecure = config('mail.encryption'); // Obtiene el valor de MAIL_ENCRYPTION
-            $mail->Port       = config('mail.port'); // Obtiene el valor de MAIL_PORT
+            $mail->Username   = config('mail.mailers.smtp.username'); // Accediendo a MAIL_USERNAME
+            $mail->Password   = config('mail.mailers.smtp.password'); // Accediendo a MAIL_PASSWORD
+            $mail->SMTPSecure = config('mail.mailers.smtp.encryption'); // Accediendo a MAIL_ENCRYPTION
+            $mail->Port       = config('mail.mailers.smtp.port'); // Accediendo a MAIL_PORT
 
             // Configuración del email
-            $mail->setFrom(config('mail.from.address'), config('mail.from.name'));
+            $mail->setFrom(config('mail.from.address'), config('mail.from.name')); // Usando desde la configuración de Laravel
             $mail->addAddress($to);
-            $mail->isHTML(false); // Usa texto plano para los mensajes.
+            $mail->isHTML(false); // Usar texto plano para los mensajes.
             $mail->Subject = $subject;
             $mail->Body    = $body;
 
