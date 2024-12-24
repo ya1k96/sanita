@@ -3,7 +3,7 @@
 namespace Yamil\Sanita;
 
 use Illuminate\Support\ServiceProvider;
-use Yamil\Sanita\Console\CheckHorizonStatusCommand;
+use Sanita\Console\CheckHorizonStatusCommand;
 
 class SanitaServiceProvider extends ServiceProvider
 {

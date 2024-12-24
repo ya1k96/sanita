@@ -2,7 +2,7 @@
     "name": "yamil/sanita",
     "autoload": {
         "psr-4": {
-            "Sanita\\": "src/"
+            "Yamil\\Sanita\\": "src/"
         }
     },
     "authors": [
