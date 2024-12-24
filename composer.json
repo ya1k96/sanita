@@ -13,5 +13,12 @@
     ],
     "require": {
         "illuminate/support": "*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "yamil\\Sanita\\SanitaServiceProvider"
+            ]
+        }
     }
 }
