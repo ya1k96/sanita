@@ -19,10 +19,7 @@ class SanitaServiceProvider extends ServiceProvider
         if (!class_exists(\Laravel\Horizon\Horizon::class)) {
             throw new \RuntimeException('Laravel Horizon is required to use Sanita.');
         }
-
-        $this->publishes([
-            __DIR__.'/Config/sanita-config.php' => config_path('sanita.php'),
-        ], 'config');
-
+        $configPath = __DIR__ . '/../Config/sanita-config.php';
+        $this->publishes([$configPath => config_path('sanita.php')], 'config');
     }
 }
