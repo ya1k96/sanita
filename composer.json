@@ -12,7 +12,8 @@
         }
     ],
     "require": {
-        "illuminate/support": "*"
+        "illuminate/support": "*",
+        "phpmailer/phpmailer": "^6.9"
     },
     "extra": {
         "laravel": {

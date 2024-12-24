@@ -32,19 +32,61 @@ class CheckHorizonStatusCommand extends Command
     
         return collect($masters)->some(fn($master) => $master->status !== 'paused');
     }
-    private function notify(string $message)
+    private function notify(string $message): void
     {
-        // Aquí puedes usar un sistema de notificación.
-        $channel = config('sanita-config.notification_channel', 'email');
+        // Obtener el canal de notificación desde tu configuración.
+        $channel = config('sanita.notification_channel', 'email');
+
         if ($channel === 'email') {
-            $recipients = config('sanita-config.notification_recipients.email', []);
-            foreach ($recipients as $email) {
-                Mail::raw($message, function ($mail) use ($email) {
-                    $mail->to($email)->subject('Alerta: Horizon Caído');
-                });
-            }
+            $this->notifyByEmail($message);
+        } else {
+            // Manejo de otros canales o advertencia si no se reconoce el canal.
+            error_log("Canal de notificación desconocido: {$channel}");
+        }
+    }
+
+    private function notifyByEmail(string $message): void
+    {
+        $recipients = config('sanita.notification_recipients.email', []);
+
+        if (empty($recipients)) {
+            error_log('No se han configurado destinatarios para notificaciones por email.');
+            return;
         }
 
-        // Similar para Slack u otros canales.
+        foreach ($recipients as $email) {
+            try {
+                $this->sendEmail($email, 'Alerta: Horizon Caído', $message);
+                error_log("Notificación enviada por email a: {$email}");
+            } catch (\Exception $e) {
+                error_log("Error al enviar email a {$email}: {$e->getMessage()}");
+            }
+        }
+    }
+
+    private function sendEmail(string $to, string $subject, string $body): void
+    {
+        $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+        try {
+            // Configuración del servidor SMTP usando configuraciones de Laravel
+            $mail->isSMTP();
+            $mail->Host       = config('mail.host'); // Obtiene el valor de MAIL_HOST
+            $mail->SMTPAuth   = true;
+            $mail->Username   = config('mail.username'); // Obtiene el valor de MAIL_USERNAME
+            $mail->Password   = config('mail.password'); // Obtiene el valor de MAIL_PASSWORD
+            $mail->SMTPSecure = config('mail.encryption'); // Obtiene el valor de MAIL_ENCRYPTION
+            $mail->Port       = config('mail.port'); // Obtiene el valor de MAIL_PORT
+
+            // Configuración del email
+            $mail->setFrom(config('mail.from.address'), config('mail.from.name'));
+            $mail->addAddress($to);
+            $mail->isHTML(false); // Usa texto plano para los mensajes.
+            $mail->Subject = $subject;
+            $mail->Body    = $body;
+
+            $mail->send();
+        } catch (\PHPMailer\PHPMailer\Exception $e) {
+            throw new \RuntimeException("Error al enviar email: {$e->getMessage()}");
+        }
     }
 }
